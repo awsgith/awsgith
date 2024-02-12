@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('create directory') {
             steps {
-                sh 'mkdir -p /home/ubuntu/dirtest'
+                sh 'mkdir -p /home/ubuntu/webhook'
             }
         }
         stage('create file') {
             steps {
-                sh 'touch /home/ubuntu/file.sh'
+                sh 'touch /home/ubuntu/webhook.sh'
             }
         }
     }
