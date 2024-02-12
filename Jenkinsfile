@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('create directory') {
+        stage('create Directory') {
             steps {
                 sh 'mkdir -p /home/ubuntu/dirtest'
             }
