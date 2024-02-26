@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('create directory') {
             steps {
-                sh 'mkdir -p /home/oracle/test'
+                sh 'mkdir -p /tmp/test'
             }
         }
         stage('create file') {
             steps {
-                sh 'touch /home/oracle/test/test.sh'
+                sh 'touch /tmp/test/test.sh'
             }
         }
     }
