@@ -1,5 +1,5 @@
 pipeline {
-    agent { node 'jenkins' }
+    agent { node 'srvr88' }
     stages {
         stage('create directory') {
             steps {
