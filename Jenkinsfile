@@ -1,6 +1,5 @@
 pipeline {
-    agent any
-
+    agent { node 'jenkins' }
     stages {
         stage('create directory') {
             steps {
@@ -14,4 +13,3 @@ pipeline {
         }
     }
 }
-
