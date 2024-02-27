@@ -10,6 +10,7 @@ pipeline {
 		cd 19c
 		sh 'wget.sh'
             }
+	}
         }
         stage('create file') {
             steps {
