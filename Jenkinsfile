@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('download the 19c software') {
             steps {
-                sh 'mkdir -p /tmp/19c'
+                sh 'sudo mkdir -p /tmp/19c'
 		cp '/usr/local/jenkins-service/workspace/shell-pipeline/wget.sh' '/tmp/19c/'
 		cd '/tmp/'
     	        sudo 'chown -R oracle:oinstall 19c'
