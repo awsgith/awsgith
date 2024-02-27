@@ -9,6 +9,7 @@ pipeline {
                     branch: "main",
                     changelog: true,
                     poll: true
+		    )
 		    cd '/tmp/19c'
 		    sh 'wget.sh'
             }
