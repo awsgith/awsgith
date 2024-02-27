@@ -6,12 +6,12 @@ pipeline {
                 sh 'mkdir -p /tmp/19c'
 		cp '/usr/local/jenkins-service/workspace/shell-pipeline/wget.sh' '/tmp/19c/'
 		cd '/tmp/'
-		chown -R oracle:oinstall 19c
+    	        sudo 'chown -R oracle:oinstall 19c'
 		cd 19c
 		sh 'wget.sh'
             }
-	}
         }
+    }
         stage('create file') {
             steps {
                 sh 'touch /tmp/agent_test/test.sh'
@@ -19,4 +19,3 @@ pipeline {
         }
     }
 }
-
