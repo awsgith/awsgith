@@ -4,10 +4,13 @@ pipeline {
         stage('download the 19c software') {
             steps {
                 sh 'mkdir -p /tmp/19c'
-		cd '/tmp/19c'
-		git clone 'https://github.com/awsgith/awsgith.git'
-		cd '/tmp/19c/awsgith'
-		sh 'wget.sh'
+		git(
+                    url: "https://github.com/awsgith/awsgith.git'",
+                    branch: "main",
+                    changelog: true,
+                    poll: true
+		    cd '/tmp/19c'
+		    sh 'wget.sh'
             }
         }
         stage('create file') {
@@ -17,3 +20,4 @@ pipeline {
         }
     }
 }
+
