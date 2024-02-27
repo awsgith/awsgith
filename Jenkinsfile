@@ -4,14 +4,11 @@ pipeline {
         stage('download the 19c software') {
             steps {
                 sh 'mkdir -p /tmp/19c'
-		git(
-                    url: "https://github.com/awsgith/awsgith.git'",
-                    branch: "main",
-                    changelog: true,
-                    poll: true
-		    )
-		    cd '/tmp/19c'
-		    sh 'wget.sh'
+		cp '/usr/local/jenkins-service/workspace/shell-pipeline/wget.sh' '/tmp/19c/'
+		cd '/tmp/'
+		chown -R oracle:oinstall 19c
+		cd 19c
+		sh 'wget.sh'
             }
         }
         stage('create file') {
