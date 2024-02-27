@@ -8,10 +8,4 @@ pipeline {
             }
         }
     }
-        stage('create file') {
-            steps {
-                sh 'touch /tmp/agent_test/test.sh'
-            }
-        }
-    }
-
+}
