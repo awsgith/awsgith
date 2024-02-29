@@ -3,11 +3,11 @@ pipeline {
     stages {
         stage('download the 19c software') {
             steps {
-	       mkdir -p /tmp/19c
-               cp /usr/local/jenkins-service/workspace/shell-pipeline/wget.sh /tmp/19c/
-	       cp /usr/local/jenkins-service/workspace/shell-pipeline/19c_download.sh /tmp/19c/
-	       chown oracle:oinstall /tmp/19c/19c_download.sh
-	       sh /tmp/19c/19c_download.sh
+	       sudo 'mkdir -p /tmp/19c'
+               sudo 'cp /usr/local/jenkins-service/workspace/shell-pipeline/wget.sh /tmp/19c/'
+	       sudo 'cp /usr/local/jenkins-service/workspace/shell-pipeline/19c_download.sh /tmp/19c/'
+	       sudo 'chown oracle:oinstall /tmp/19c/19c_download.sh'
+	       sudo 'sh /tmp/19c/19c_download.sh'
             }
         }
     }
