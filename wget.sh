@@ -1,16 +1,18 @@
 #!/bin/sh
 
 #
-# Generated on Tue Feb 27 11:35:07 PST 2024
+# Generated on Fri Mar 01 09:09:42 PST 2024
 # Start of user configurable variables
 #
 LANG=C
 export LANG
 
 #Trap to cleanup cookie file in case of unexpected exits.
-trap 'rm -f $COOKIE_FILE; exit 1' 1 2 3 6 
+trap 'rm -f $COOKIE_FILE; exit 1' 1 2 3 6
 
-# SSO username 
+# SSO username
+#printf 'SSO User Name:'
+#read SSO_USERNAME
 SSO_USERNAME=tekdba2@gmail.com
 SSO_PASSWORD=Welcome#123
 
@@ -21,20 +23,20 @@ WGET=/usr/bin/wget
 LOGDIR=.
 LOGFILE=$LOGDIR/wgetlog-$(date +%m-%d-%y-%H:%M).log
 
-# Print wget version info 
-echo "Wget version info: 
+# Print wget version info
+echo "Wget version info:
 ------------------------------
-$($WGET -V) 
-------------------------------" > "$LOGFILE" 2>&1 
+$($WGET -V)
+------------------------------" > "$LOGFILE" 2>&1
 
-# Location of cookie file 
-COOKIE_FILE=$(mktemp -t wget_sh_XXXXXX) >> "$LOGFILE" 2>&1 
-if [ $? -ne 0 ] || [ -z "$COOKIE_FILE" ] 
-then 
- echo "Temporary cookie file creation failed. See $LOGFILE for more details." |  tee -a "$LOGFILE" 
- exit 1 
-fi 
-echo "Created temporary cookie file $COOKIE_FILE" >> "$LOGFILE" 
+# Location of cookie file
+COOKIE_FILE=$(mktemp -t wget_sh_XXXXXX) >> "$LOGFILE" 2>&1
+if [ $? -ne 0 ] || [ -z "$COOKIE_FILE" ]
+then
+ echo "Temporary cookie file creation failed. See $LOGFILE for more details." |  tee -a "$LOGFILE"
+ exit 1
+fi
+echo "Created temporary cookie file $COOKIE_FILE" >> "$LOGFILE"
 
 # Output directory and file
 OUTPUT_DIR=.
@@ -44,20 +46,20 @@ OUTPUT_DIR=.
 
 # The following command to authenticate uses HTTPS. This will work only if the wget in the environment
 # where this script will be executed was compiled with OpenSSL.
-# 
- $WGET  --secure-protocol=auto --save-cookies="$COOKIE_FILE" --keep-session-cookies --http-user "$SSO_USERNAME" --http-password  "$SSO_PASSWORD" "https://edelivery.oracle.com/osdc/cliauth" -a "$LOGFILE"
+#
+ $WGET  --secure-protocol=auto --save-cookies="$COOKIE_FILE" --keep-session-cookies --http-user "$SSO_USERNAME" --http-password "$SSO_PASSWORD"   "https://edelivery.oracle.com/osdc/cliauth" -a "$LOGFILE"
 
-# Verify if authentication is successful 
-if [ $? -ne 0 ] 
-then 
+# Verify if authentication is successful
+if [ $? -ne 0 ]
+then
  echo "Authentication failed with the given credentials." | tee -a "$LOGFILE"
- echo "Please check logfile: $LOGFILE for more details." 
+ echo "Please check logfile: $LOGFILE for more details."
 else
- echo "Authentication is successful. Proceeding with downloads..." >> "$LOGFILE" 
- $WGET --load-cookies="$COOKIE_FILE" "https://edelivery.oracle.com/osdc/softwareDownload?fileName=V982063-01.zip&token=akYyelhVS2lXcTdzek1FSm9yMXRLZyE6OiFmaWxlSWQ9MTA0NDg4MDA2JmZpbGVTZXRDaWQ9OTAxMzc3JnJlbGVhc2VDaWRzPTg5NDk4MiZwbGF0Zm9ybUNpZHM9MzUmZG93bmxvYWRUeXBlPTk1NzY0JmFncmVlbWVudElkPTEwNTMxNjg1JmVtYWlsQWRkcmVzcz10ZWtkYmEyQGdtYWlsLmNvbSZ1c2VyTmFtZT1FUEQtVEVLREJBMkBHTUFJTC5DT00maXBBZGRyZXNzPTI0MDY6YjQwMDpkNTpjZjM1OmRjOWI6ZjMyMDo4MWNiOjFiMjAmdXNlckFnZW50PU1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS8xMjIuMC4wLjAgU2FmYXJpLzUzNy4zNiZjb3VudHJ5Q29kZT1JTiZkbHBDaWRzPTEwNjMyMDk" -O "$OUTPUT_DIR/V982063-01.zip" >> "$LOGFILE" 2>&1 
-fi 
+ echo "Authentication is successful. Proceeding with downloads..." >> "$LOGFILE"
+ $WGET --load-cookies="$COOKIE_FILE" "https://edelivery.oracle.com/osdc/softwareDownload?fileName=V982063-01.zip&token=YkJkQkxINXk2Ty9NUmJkTVdWYXhEZyE6OiFmaWxlSWQ9MTA0NDg4MDA2JmZpbGVTZXRDaWQ9OTAxMzc3JnJlbGVhc2VDaWRzPTg5NDk4MiZwbGF0Zm9ybUNpZHM9MzUmZG93bmxvYWRUeXBlPTk1NzY0JmFncmVlbWVudElkPTEwNTQzMjUwJmVtYWlsQWRkcmVzcz10ZWtkYmEyQGdtYWlsLmNvbSZ1c2VyTmFtZT1FUEQtVEVLREJBMkBHTUFJTC5DT00maXBBZGRyZXNzPTI0MDY6YjQwMDpkNTpjZjM1OjJjOTQ6MjJiZjo3NmI4OjQ3N2EmdXNlckFnZW50PU1vemlsbGEvNS4wIChXaW5kb3dzIE5UIDEwLjA7IFdpbjY0OyB4NjQpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS8xMjIuMC4wLjAgU2FmYXJpLzUzNy4zNiZjb3VudHJ5Q29kZT1JTiZkbHBDaWRzPTEwNjMyMDk" -O "$OUTPUT_DIR/V982063-01.zip" >> "$LOGFILE" 2>&1
+fi
 
 # Cleanup
-rm -f "$COOKIE_FILE" 
-echo "Removed temporary cookie file $COOKIE_FILE" >> "$LOGFILE" 
+rm -f "$COOKIE_FILE"
+echo "Removed temporary cookie file $COOKIE_FILE" >> "$LOGFILE"
 
